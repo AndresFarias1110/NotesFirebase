@@ -51,8 +51,6 @@ export class AuthService {
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
-        /* Call the SendVerificaitonMail() function when new user sign
-        up and returns promise */
         this.sendVerificationMail();
         this.setUserData(result.user);
       })
@@ -65,7 +63,8 @@ export class AuthService {
     return this.afAuth.currentUser
       .then((u: any) => u.sendEmailVerification())
       .then(() => {
-        this.router.navigate(['verify-email-address']);
+        window.alert('Se ha enviado un mensaje de verificación a tu correo.');
+        this.router.navigate(['sign-in']);
       });
   }
   // Reset Forggot password
