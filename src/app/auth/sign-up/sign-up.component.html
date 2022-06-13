@@ -1,52 +1,36 @@
-<div class="displayTable">
-  <div class="displayTableCell">
-    <div class="authBlock">
-      <h3>Crear cuenta</h3>
-      <div class="formGroup">
-        <input
-          type="email"
-          class="formControl"
-          placeholder="Email Address"
-          #userEmail
-          required
-        />
+<div class="container-form">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-card class="">
+      <mat-card-header>
+        <mat-card-title>Notas</mat-card-title>
+
+      </mat-card-header>
+      <mat-card-content>
+        <div class="mb-3">
+          <span>Crear cuenta</span>
+        </div>
+        <mat-form-field>
+          <input matInput placeholder="Correo" formControlName="userName" required>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Contraseña" type="password" formControlName="password" required>
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions class="text-center">
+        <button mat-raised-button color="primary" type="submit">Crear cuenta</button>
+      </mat-card-actions>
+      <mat-card-actions>
+          <div class="google-btn" (click)="authService.googleAuth()">
+            <div class="google-icon-wrapper">
+              <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+            </div>
+            <p class="btn-text"><b>Continuar con Google</b></p>
+          </div>
+      </mat-card-actions>
+      <div class="redirectToLogin">
+        <span>¿Ya tienes una cuenta?<a class="redirect" routerLink="/sign-in"> Iniciar sesión</a></span>
       </div>
-      <div class="formGroup">
-        <input
-          type="password"
-          class="formControl"
-          placeholder="Password"
-          #userPwd
-          required
-        />
-      </div>
-      <div class="formGroup">
-        <input
-          type="button"
-          class="btn btnPrimary"
-          value="Sign Up"
-          (click)="authService.signUp(userEmail.value, userPwd.value)"
-        />
-      </div>
-      <div class="formGroup">
-        <span class="or"><span class="orInner">Or</span></span>
-      </div>
-      <!-- Continue with Google -->
-      <div class="formGroup">
-        <button
-          type="button"
-          class="btn googleBtn"
-          (click)="authService.googleAuth()"
-        >
-          <i class="fab fa-google-plus-g"></i>
-          Continuar con una cuenta de Google
-        </button>
-      </div>
-    </div>
-    <div class="redirectToLogin">
-      <span>¿Ya tienes una cuenta?
-        <span class="redirect" routerLink="/sign-in">Inicia sesión</span></span
-      >
-    </div>
-  </div>
+    </mat-card>
+  </form>
 </div>
+
