@@ -1,0 +1,52 @@
+<mat-toolbar color="primary">
+  <div class="col-6">
+    <mat-icon>local_fire_department</mat-icon>
+    <span>Notas</span>
+  </div>
+  <div class="col-6">
+    <button mat-button (click)="authService.signOut()" class="right">Cerrar sesión</button>
+  </div>
+</mat-toolbar>
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <h1>Mis notas</h1>
+    </div>
+    <div class="col-6">
+      <button (click)="newNote()" mat-raised-button color="primary" class="right">
+        <mat-icon>add</mat-icon> Nueva nota
+      </button>
+    </div>
+    <mat-divider></mat-divider>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 col-md-4 col-xl-4 mt-2">
+      <h3 class="text-success text-center">Activas</h3>
+
+      <mat-card class="list">
+        <p class="empty-label" *ngIf="notes.length === 0">Lista vacia</p>
+        <app-notes-list (delete)="noteDeleted($event)" *ngFor="let note of notes" [note]="note.payload.doc">
+        </app-notes-list>
+      </mat-card>
+    </div>
+
+    <div class="col-sm-12 col-md-4 col-xl-4 mt-2">
+      <h3 class="text-danger text-center">Eliminadas</h3>
+
+      <mat-card class="list">
+        <p class="empty-label" *ngIf="deleted.length === 0">Lista vacia</p>
+        <app-notes-list (active)="active($event)" (archived)="noteArchived($event)" *ngFor="let note of deleted" [note]="note.payload.doc">
+        </app-notes-list>
+      </mat-card>
+    </div>
+    <div class="col-sm-12 col-md-4 col-xl-4 mt-2">
+      <h3 class="text-danger text-center">Archivadas</h3>
+
+      <mat-card class="list">
+        <p class="empty-label" *ngIf="archived.length === 0">Lista vacia</p>
+        <app-notes-list *ngFor="let note of archived" [note]="note.payload.doc">
+        </app-notes-list>
+      </mat-card>
+    </div>
+  </div>
+</div>
