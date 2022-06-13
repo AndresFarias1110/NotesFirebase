@@ -1,0 +1,19 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <mat-form-field>
+    <mat-label>Titulo</mat-label>
+    <input matInput cdkFocusInitial formControlName="title" oninput="this.value = this.value.toUpperCase()" required/>
+    <p class="title-error">
+      <span class="text-danger" *ngIf="isEmail">No debe de ser correo</span>
+    </p>
+  </mat-form-field>
+
+  <mat-form-field class="mt-2">
+    <mat-label>Descripción</mat-label>
+    <textarea matInput formControlName="description" minlength="25" maxlength="250" required></textarea>
+  </mat-form-field>
+
+  <div mat-dialog-actions>
+    <button mat-button type="submit" [disabled]="!form.valid">Guardar</button>
+    <a mat-button (click)="cancel()">Cancelar</a>
+  </div>
+</form>

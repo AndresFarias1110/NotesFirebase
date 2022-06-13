@@ -1,0 +1,12 @@
+<mat-card class="item" *ngIf="note" (dblclick)="edit.emit(note.data)">
+  <mat-icon *ngIf="note.data().status === 1" style="float: right; cursor: pointer;" (click)="noteDelete()">delete</mat-icon>
+  <mat-icon *ngIf="!note.data().status" style="float: right; cursor: pointer;" (click)="archive()">delete_forever</mat-icon>
+  <mat-icon *ngIf="!note.data().status" style="float: right; cursor: pointer;" (click)="revert()">check_circle</mat-icon>
+  <h2>{{ note.data().title }}</h2>
+  <p>
+    {{ note.data().description }}
+  </p>
+  <p>
+    Fecha creación: <small style="float: right;"><strong>{{ note.data().createdAt | date: 'dd/MM/yyyy hh:mm' }}</strong></small>
+  </p>
+</mat-card>
